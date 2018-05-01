@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://www.pythonanywhere.com/user/bja282/files/home/bja282/mysite/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width">
+  <title>HWIII</title>
+  <script src="./index_files/react-with-addons-15.1.0.js"></script>
+  <script src="./index_files/react-dom-15.1.0.js"></script>
+  <script src="./index_files/browser.js"></script>
+  <script src="./index_files/vega@3"></script>
+  <script src="./index_files/vega-lite@2"></script>
+  <script src="./index_files/vega-embed@3"></script>
+  <script src="./index_files/vega.js"></script>
+  <script src="./index_files/vega-lite.js"></script>
+  <script src="./index_files/vega-embed.js"></script>
+</head>
+<body>
+    <div id="ui"><div data-reactroot=""><form><label><center><h1>Food by Zip</h1></center><!-- react-text: 6 -->&nbsp; &nbsp; Zip Code: &nbsp;<!-- /react-text --><input type="text" name="zip"></label><input type="submit" value="Update"></form></div></div><br><br>
+    <div id="vis"></div>
+
+  <script type="text/babel">
+class AppSelectingForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      zip:10018,
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+      var spec = `/vis/${this.state.zip}`;
+//     spec = `http://SERVER_LOCATION/${this.state.platform}/${this.state.zip}`;
+    vegaEmbed('#vis', spec, {actions:false});
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+         <center><h1>Food by Zip</h1></center>
+          &nbsp; &nbsp;
+          Zip Code: &nbsp;
+          <input type="text" name="zip" onChange={this.handleChange} />
+          </label>
+        <input type="submit" value="Update" />
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <div>
+    <AppSelectingForm />
+  </div>,
+  document.getElementById('ui')
+);
+
+
+  </script>
+
+
+</body></html>
